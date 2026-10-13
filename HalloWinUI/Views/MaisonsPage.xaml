@@ -107,7 +107,9 @@
             </GridView.ItemContainerStyle>
 
             <GridView.ItemTemplate>
-                <DataTemplate x:DataType="viewmodels:MainMaisonsViewModel">
+                <DataTemplate x:DataType="viewmodels:MaisonViewModel">
+                    <!-- Wrong datatype -->
+                    <!-- Do bindings -->
                     <Border
                         Width="280"
                         Padding="16"
@@ -118,7 +120,7 @@
                             <TextBlock
                                 FontSize="14"
                                 FontWeight="SemiBold"
-                                Text=""
+                                Text="{x:Bind NumeroCivique, Mode=OneWay}" 
                                 TextWrapping="Wrap" />
                             <TextBlock
                                 FontSize="14"

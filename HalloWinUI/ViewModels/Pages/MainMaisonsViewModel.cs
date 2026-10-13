@@ -4,11 +4,11 @@ using System.Collections.ObjectModel;
 
 namespace HalloWinUI.ViewModels.Pages
 {
-    public class MainMaisonsViewModel
+    public class MainMaisonsViewModel : BaseViewModel
     {
         private readonly IHalloweenDataProvider _dataProvider;
 
-        public ObservableCollection<Maison> Maisons { get; } = new ObservableCollection<Maison>();
+        public ObservableCollection<MaisonViewModel> Maisons { get; } = new ObservableCollection<MaisonViewModel>();
 
         public MainMaisonsViewModel(IHalloweenDataProvider halloweenDataProvider)
         {
@@ -20,7 +20,7 @@ namespace HalloWinUI.ViewModels.Pages
             Maisons.Clear();
             foreach (Maison maison in _dataProvider.GetMaisons())
             {
-                Maisons.Add(maison);
+                Maisons.Add(new MaisonViewModel(maison));
             }
 
         }
