@@ -119,18 +119,45 @@
                         BorderBrush="#FFFFCC99"
                         BorderThickness="2">
                         <!--  Les items sélectionnés n'ont pas l'air d'être sélectionnés et je ne sais pas pourquoi  -->
-                        <StackPanel Spacing="12">
+                        <Grid RowSpacing="12">
+                            <Grid.RowDefinitions>
+                                <RowDefinition>auto</RowDefinition>
+                                <RowDefinition>auto</RowDefinition>
+                                <RowDefinition>auto</RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition>*</ColumnDefinition>
+                                <ColumnDefinition>auto</ColumnDefinition>
+                            </Grid.ColumnDefinitions>
                             <TextBlock
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
                                 FontSize="14"
                                 FontWeight="SemiBold"
                                 Text="{x:Bind Adresse, Mode=OneWay}"
                                 TextWrapping="Wrap" />
                             <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
                                 FontSize="14"
                                 Foreground="Black"
                                 Text="{x:Bind Region, Mode=OneWay}" />
-                            <CheckBox Content="Signaler" IsChecked="{x:Bind EstSignalee, Mode=TwoWay}" />
-                        </StackPanel>
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                VerticalAlignment="Center"
+                                FontSize="14"
+                                Foreground="Black"
+                                Text="{x:Bind StatutSecurite, Mode=OneWay}" />
+                            <CheckBox
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Content="Signaler"
+                                IsChecked="{x:Bind EstSignalee, Mode=TwoWay}" />
+                        </Grid>
                     </Border>
                 </DataTemplate>
             </GridView.ItemTemplate>

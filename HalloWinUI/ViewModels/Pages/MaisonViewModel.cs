@@ -31,6 +31,7 @@ namespace HalloWinUI.ViewModels.Pages
                 if (this._maison.NumeroCivique != value) {
                     this._maison.NumeroCivique = value;
                     RaisePropertyChanged();
+                    RaisePropertyChanged("Adresse");
                 }
             }
         }
@@ -45,6 +46,7 @@ namespace HalloWinUI.ViewModels.Pages
                 {
                     this._maison.Rue = value;
                     RaisePropertyChanged();
+                    RaisePropertyChanged("Adresse");
                 }
             }
         }
@@ -66,6 +68,7 @@ namespace HalloWinUI.ViewModels.Pages
                 {
                     this._maison.Ville = value;
                     RaisePropertyChanged();
+                    RaisePropertyChanged("Region");
                 }
             }
         }
@@ -82,6 +85,7 @@ namespace HalloWinUI.ViewModels.Pages
                 {
                     this._maison.CodePostal = value;
                     RaisePropertyChanged();
+                    RaisePropertyChanged("Region");
                 }
             }
         }
@@ -112,8 +116,14 @@ namespace HalloWinUI.ViewModels.Pages
                 {
                     this._maison.EstSignalee = value;
                     RaisePropertyChanged();
+                    RaisePropertyChanged("StatutSecurite");
                 }
             }
+        }
+
+        public string StatutSecurite
+        {
+            get => this.EstSignalee ? "Signalé" : "Sécuritaire";
         }
     }
 }
