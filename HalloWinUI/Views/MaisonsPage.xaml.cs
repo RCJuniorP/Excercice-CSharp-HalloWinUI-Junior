@@ -30,7 +30,73 @@ namespace HalloWinUI.Views
         {
             ViewModel = new MainMaisonsViewModel(new HalloweenDataProvider());
             InitializeComponent();
+
+            this.Loaded += this.MaisonPage_Loaded;
+        }
+
+        public void MaisonPage_Loaded(object sender, RoutedEventArgs e)
+        {
             ViewModel.ChargerDonnees();
+        }
+
+        private async void btnAjouterMaison_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ViewModel.AjouterMaison())
+            {
+                ContentDialog dialog = new ContentDialog()
+                {
+                    Title = "Erreur",
+                    Content = "Il manque des information(s) obligatoires!",
+                    CloseButtonText = "OK",
+                    XamlRoot = this.Content.XamlRoot
+                };
+                await dialog.ShowAsync();
+            }
+        }
+
+        private async void btnSupprimerMaison_Click(object sender, RoutedEventArgs e)
+        {
+            if (ViewModel.MaisonSelectionnee is null)
+            {
+                ContentDialog dialogueErreur = new ContentDialog()
+                {
+                    Title = "Erreur",
+                    Content = "Vous devez sélectionner une maison à supprimer!",
+                    CloseButtonText = "OK",
+                    XamlRoot = this.Content.XamlRoot
+                };
+                await dialogueErreur.ShowAsync();
+                return;
+            }
+
+            ContentDialog dialogueConfirmation = new ContentDialog()
+            {
+                Title = "Erreur",
+                Content = $"Êtes vous sûr de vouloir supprimer la maison {ViewModel.MaisonSelectionnee.Adresse} à {ViewModel.MaisonSelectionnee.Region} ?",
+                PrimaryButtonText = "Supprimer",
+                CloseButtonText = "Annuler",
+                XamlRoot = this.Content.XamlRoot
+            };
+            ContentDialogResult resultat = await dialogueConfirmation.ShowAsync();
+
+            if (resultat == ContentDialogResult.Primary)
+            {
+                bool resultatSuppression = ViewModel.SupprimerMaison();
+                if (!resultatSuppression)
+                {
+                    ContentDialog dialogueErreur = new ContentDialog()
+                    {
+                        Title = "Erreur",
+                        Content = "Il y a eu une erreur lors de la supression! Elle n'a pas été effectuée.",
+                        CloseButtonText = "OK",
+                        XamlRoot = this.Content.XamlRoot
+                    };
+                    await dialogueErreur.ShowAsync();
+                    return;
+                }
+            }
+            return;
+
         }
     }
 }

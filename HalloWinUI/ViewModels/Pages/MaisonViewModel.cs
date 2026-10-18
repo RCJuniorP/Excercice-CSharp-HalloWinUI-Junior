@@ -34,5 +34,86 @@ namespace HalloWinUI.ViewModels.Pages
                 }
             }
         }
+
+        public string Rue
+        {
+            get {
+                return this._maison.Rue;
+            }
+            set { 
+                if (this._maison.Rue != value)
+                {
+                    this._maison.Rue = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public string Adresse
+        {
+            get => this.NumeroCivique + " " + this.Rue;
+        }
+
+        public string Ville
+        {
+            get
+            {
+                return this._maison.Ville;
+            }
+            set
+            {
+                if (this._maison.Ville != value)
+                {
+                    this._maison.Ville = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public string CodePostal
+        {
+            get
+            {
+                return this._maison.CodePostal;
+            }
+            set
+            {
+                if (this._maison.CodePostal != value)
+                {
+                    this._maison.CodePostal = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public string Region
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(this.CodePostal))
+                {
+                    return this.Ville;
+                } else
+                {
+                    return this.Ville + " (" + this.CodePostal + ")";
+                }
+            }
+        }
+
+        public bool EstSignalee
+        {
+            get
+            {
+                return this._maison.EstSignalee;
+            }
+            set
+            {
+                if (this._maison.EstSignalee != value)
+                {
+                    this._maison.EstSignalee = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
     }
 }

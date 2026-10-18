@@ -20,7 +20,7 @@ namespace HalloWinUI.Data
         private void InitialiserDonnees()
         {
             AjouterMaison(new Maison("123", "Rue des Fantômes", "Gatineau", estSignalee: true));
-            AjouterMaison(new Maison("456", "Avenue des Citrouilles", "Gatineau"));
+            AjouterMaison(new Maison("456", "Avenue des Citrouilles", "Gatineau", codePostal:"J81 5R2"));
             AjouterMaison(new Maison("789", "Boulevard Hanté", "Gatineau"));
             AjouterMaison(new Maison("321", "Chemin des Sorcières", "Gatineau"));
         }
