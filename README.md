@@ -58,3 +58,18 @@ classDiagram
     Enfant "1" -- "0..*" Visite : effectue
     Visite "0..*" -- "1" Maison : concerne
 ```
+
+## Partie 2
+
+4. Ajouter la navigation. Le menu de navigation doit contenir deux pages : « Maisons » et « Enfants ». La page « Maisons » doit s'afficher au démarrage.
+
+5. Créer la page « Enfants » :
+	- Compléter le fournisseur de données pour gérer les enfants (obtenir la liste). Ajouter quelques enfants au départ.
+	- Afficher la liste de tous les enfants. Vous devez créer les modèles de vue nécessaires en respectant l'architecture MVVM.
+
+6. Ajouter un enfant dans une page séparée :
+	- Ajouter un bouton « Ajouter un enfant » dans la page « Enfants ». Ce bouton doit naviguer vers une nouvelle page contenant un formulaire.
+	- Après l'enregistrement, revenir automatiquement à la page « Enfants ». Le nouvel enfant doit apparaître dans la liste.
+	- Un bouton « Annuler » doit permettre de revenir à la page précédente sans rien enregistrer.
+
+7. Compléter les fonctionnalités de suppression et de modification des informations des enfants.

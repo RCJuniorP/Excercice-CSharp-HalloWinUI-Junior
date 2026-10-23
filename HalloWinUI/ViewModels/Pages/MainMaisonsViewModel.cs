@@ -1,6 +1,7 @@
 ﻿using HalloWinUI.Data;
 using HalloWinUI.Models;
 using HalloWinUI.ViewModels;
+using HalloWinUI.ViewModels.Models;
 using System.Collections.ObjectModel;
 
 namespace HalloWinUI.ViewModels.Pages

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HalloWinUI.ViewModels.Pages
+namespace HalloWinUI.ViewModels.Models
 {
     public class MaisonViewModel : BaseViewModel
     {

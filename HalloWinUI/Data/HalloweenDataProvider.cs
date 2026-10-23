@@ -12,6 +12,9 @@ namespace HalloWinUI.Data
         private readonly List<Maison> _maisons = new List<Maison>();
         private int _prochainIdMaison = 1;
 
+        private readonly List<Enfant> _enfants = new List<Enfant>();
+        private int _prochainIdEnfant = 1;
+
         public HalloweenDataProvider()
         {
             InitialiserDonnees();
@@ -58,6 +61,35 @@ namespace HalloWinUI.Data
                 existante.Ville = maison.Ville;
                 existante.CodePostal = maison.CodePostal;
                 existante.EstSignalee = maison.EstSignalee;
+            }
+        }
+
+        public List<Enfant> GetEnfants()
+        {
+            return new(this._enfants);
+        }
+
+        public void AjouterEnfant(Enfant enfant)
+        {
+            enfant.Id = this._prochainIdMaison++;
+            this._enfants.Add(enfant);
+        }
+
+        public void SupprimerEnfant(int enfantId)
+        {
+            Enfant? enfant = this._enfants.FirstOrDefault<Enfant>(enfant => enfant.Id == enfantId);
+            if (enfant is not null)
+            {
+                this._enfants.Remove(enfant);
+            }
+        }
+
+        public void ModifierEnfant(Enfant enfantModifie)
+        {
+            Enfant? enfantConcerne = this._enfants.FirstOrDefault(enfant => enfant.Id == enfantModifie.Id);
+            if (enfantConcerne is not null)
+            {
+                enfantConcerne.Nom = enfantModifie.Nom;
             }
         }
 
