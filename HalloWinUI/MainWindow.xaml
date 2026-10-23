@@ -10,5 +10,41 @@
     Title="HalloWinUI"
     mc:Ignorable="d">
 
-    <views:MaisonsPage />
+    <!--  Code de la démo  -->
+    <NavigationView
+        x:Name="NavView"
+        AlwaysShowHeader="False"
+        BackRequested="NavView_BackRequested"
+        IsBackButtonVisible="Auto"
+        IsSettingsVisible="False"
+        PaneDisplayMode="Top"
+        SelectionChanged="NavView_SelectionChanged">
+
+        <NavigationView.MenuItems>
+            <!--  Utiliser le nom complet de la page dans la propriété Tag  -->
+            <NavigationViewItem
+                Content="Page 1"
+                Icon="Home"
+                IsSelected="True"
+                Tag="HalloWinUI.Views.MaisonsPage" />
+
+            <NavigationViewItem Content="Page 2" Tag="HalloWinUI.Views.EnfantsPage">
+                <!--  Utilisation d'une icône personnalisée  -->
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xEB3C;" />
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+
+        </NavigationView.MenuItems>
+
+        <!--
+            Frame : affiche la page choisie dans le menu
+            Navigated : appelé après chaque navigation réussie (met à jour la flèche de retour et le menu)
+            NavigationFailed : appelé si une navigation échoue (page introuvable)
+        -->
+        <Frame
+            x:Name="ContentFrame"
+            Navigated="ContentFrame_Navigated"
+            NavigationFailed="ContentFrame_NavigationFailed" />
+    </NavigationView>
 </Window>

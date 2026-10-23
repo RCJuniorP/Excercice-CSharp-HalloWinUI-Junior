@@ -26,6 +26,10 @@ namespace HalloWinUI.Data
             AjouterMaison(new Maison("456", "Avenue des Citrouilles", "Gatineau", codePostal:"J81 5R2"));
             AjouterMaison(new Maison("789", "Boulevard Hanté", "Gatineau"));
             AjouterMaison(new Maison("321", "Chemin des Sorcières", "Gatineau"));
+
+            AjouterEnfant(new Enfant("Nom extrêmement long"));
+            AjouterEnfant(new Enfant("Nom très long"));
+            AjouterEnfant(new Enfant("Nom très très long"));
         }
 
         public List<Maison> GetMaisons()
@@ -71,7 +75,7 @@ namespace HalloWinUI.Data
 
         public void AjouterEnfant(Enfant enfant)
         {
-            enfant.Id = this._prochainIdMaison++;
+            enfant.Id = this._prochainIdEnfant++;
             this._enfants.Add(enfant);
         }
 

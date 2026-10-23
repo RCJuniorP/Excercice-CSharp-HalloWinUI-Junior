@@ -1,3 +1,6 @@
+using HalloWinUI.Data;
+using HalloWinUI.ViewModels.Models;
+using HalloWinUI.ViewModels.Pages;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -23,9 +26,18 @@ namespace HalloWinUI.Views
     /// </summary>
     public sealed partial class EnfantsPage : Page
     {
+        MainEnfantsViewModel ViewModel { get; }
         public EnfantsPage()
         {
+            this.ViewModel = new MainEnfantsViewModel(new HalloweenDataProvider());
             InitializeComponent();
+
+            this.Loaded += this.ApresChargement;
+        }
+
+        public async void ApresChargement(object sender, RoutedEventArgs e) 
+        {
+            this.ViewModel.ChargerDonnees();
         }
     }
 }

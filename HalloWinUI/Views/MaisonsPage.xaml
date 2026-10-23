@@ -6,7 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:HalloWinUI.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewmodels="using:HalloWinUI.ViewModels.Pages"
+    xmlns:viewmodels="using:HalloWinUI.ViewModels"
+    xmlns:viewmodels.Models="using:HalloWinUI.ViewModels.Models"
+    xmlns:viewmodels.Pages="using:HalloWinUI.ViewModels.Pages"
     mc:Ignorable="d">
 
     <Grid Padding="16" RowSpacing="12">
@@ -111,7 +113,7 @@
             </GridView.ItemContainerStyle>
 
             <GridView.ItemTemplate>
-                <DataTemplate x:DataType="viewmodels:MaisonViewModel">
+                <DataTemplate x:DataType="viewmodels.Models:MaisonViewModel">
                     <Border
                         Width="280"
                         Padding="16"
