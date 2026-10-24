@@ -23,15 +23,15 @@
         <NavigationView.MenuItems>
             <!--  Utiliser le nom complet de la page dans la propriété Tag  -->
             <NavigationViewItem
-                Content="Page 1"
+                Content="Maisons"
                 Icon="Home"
                 IsSelected="True"
                 Tag="HalloWinUI.Views.MaisonsPage" />
 
-            <NavigationViewItem Content="Page 2" Tag="HalloWinUI.Views.EnfantsPage">
+            <NavigationViewItem Content="Enfants" Tag="HalloWinUI.Views.EnfantsPage">
                 <!--  Utilisation d'une icône personnalisée  -->
                 <NavigationViewItem.Icon>
-                    <FontIcon Glyph="&#xEB3C;" />
+                    <FontIcon Glyph="&#xE77B;" />
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
 
