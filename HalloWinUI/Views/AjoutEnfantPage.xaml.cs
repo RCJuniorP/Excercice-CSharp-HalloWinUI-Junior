@@ -1,3 +1,5 @@
+using HalloWinUI.ViewModels.Pages;
+using HalloWinUI.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -23,9 +25,34 @@ namespace HalloWinUI.Views
     /// </summary>
     public sealed partial class AjoutEnfantPage : Page
     {
+        public MainAjoutEnfantViewModel ViewModel;
         public AjoutEnfantPage()
         {
+            this.ViewModel = new MainAjoutEnfantViewModel();
             InitializeComponent();
+        }
+
+        public async void btnConfirmerEnfant_Click(object sender, RoutedEventArgs e)
+        {
+            Enfant? enfantCree = this.ViewModel.CreerEnfant();
+            if (enfantCree is null)
+            {
+                ContentDialog dialogueErreur = new ContentDialog()
+                {
+                    Title = "Erreur",
+                    Content = "Il y a eu une erreur lors de la création du nouvel enfant! Assurez vous de remplir toutes les informations nécessaires.",
+                    CloseButtonText = "OK",
+                    XamlRoot = this.XamlRoot
+                };
+                await dialogueErreur.ShowAsync();
+                return;
+            }
+            Frame.Navigate(typeof(EnfantsPage), enfantCree);
+        }
+
+        public void btnAnnulerAjout_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(EnfantsPage), null);
         }
     }
 }

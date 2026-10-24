@@ -16,6 +16,7 @@
             <RowDefinition>auto</RowDefinition>
             <RowDefinition>auto</RowDefinition>
             <RowDefinition>auto</RowDefinition>
+            <RowDefinition>auto</RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition>auto</ColumnDefinition>
@@ -39,6 +40,7 @@
             Grid.Column="0"
             AutomationProperties.Name="Liste des enfants"
             ItemsSource="{x:Bind ViewModel.Enfants, Mode=OneWay}"
+            SelectedItem="{x:Bind ViewModel.EnfantSelectionne, Mode=TwoWay}"
             SelectionMode="Single">
 
             <GridView.ItemContainerStyle>
@@ -85,5 +87,20 @@
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="0"
+            Orientation="Horizontal">
+            <Button Click="btnAjouterEnfant_Click">
+                <Button.Content>
+                    Ajouter un enfant
+                </Button.Content>
+            </Button>
+            <Button Click="btnSupprimerEnfant_Click">
+                <Button.Content>
+                    Supprimer un enfant
+                </Button.Content>
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>

@@ -73,3 +73,11 @@ classDiagram
 	- Un bouton « Annuler » doit permettre de revenir à la page précédente sans rien enregistrer.
 
 7. Compléter les fonctionnalités de suppression et de modification des informations des enfants.
+Pour la modification, réutiliser la page AjouterEnfant : 
+    Utiliser NamedTuple en naviguant vers Enfants(Page) pour savoir s'il y a une modification ou une création
+    Utiliser un paramètre <Enfant?> Vers AjouterEnfant(Page) pour savoir s'il y a une modification
+    Si AjouterEnfant reçoit un enfant comme paramètre
+        mettre à jour l'interface pour dire que c'est une modification et remplir le formulaire avec les données de l'enfant existant
+    Sinon
+        Mettre à jour l'interface pour dire que c'est une création et effacer les données dans le formulaire
+    Utiliser le ViewModel pour faire ça

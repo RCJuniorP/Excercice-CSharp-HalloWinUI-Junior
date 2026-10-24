@@ -102,18 +102,21 @@ namespace HalloWinUI.ViewModels.Pages
             {
                 return false;
             }
-            MaisonViewModel nouvelleMaison = new MaisonViewModel(new Maison(this.FormNumeroRue, this.FormNomRue, this.FormVille, this.FormCodePostal));
-            this.Maisons.Add(nouvelleMaison);
+            Maison nouvelleMaison = new Maison(this.FormNumeroRue, this.FormNomRue, this.FormVille, this.FormCodePostal);
+            this.Maisons.Add(new MaisonViewModel(nouvelleMaison));
+            this._dataProvider.AjouterMaison(nouvelleMaison);
             return true;
         }
 
         public bool SupprimerMaison()
         {
-            if (this.MaisonSelectionnee is null || !this.Maisons.Contains(this.MaisonSelectionnee))
+            MaisonViewModel? maisonSupprimee = this.MaisonSelectionnee;
+            if (maisonSupprimee is null || !this.Maisons.Contains(maisonSupprimee))
             {
                 return false;
             }
-            this.Maisons.Remove(this.MaisonSelectionnee);
+            this.Maisons.Remove(maisonSupprimee);
+            this._dataProvider.SupprimerMaison(maisonSupprimee.Id);
             return true;
         }
     }
