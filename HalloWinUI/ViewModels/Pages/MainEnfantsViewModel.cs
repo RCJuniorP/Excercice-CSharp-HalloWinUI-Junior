@@ -30,6 +30,7 @@ namespace HalloWinUI.ViewModels.Pages
             }
         }
 
+
         public MainEnfantsViewModel(IHalloweenDataProvider halloweenDataProvider)
         {
             this._dataProvider = halloweenDataProvider;
@@ -44,11 +45,17 @@ namespace HalloWinUI.ViewModels.Pages
             }
         }
 
-        public bool AjouterEnfantFormulaire(Enfant enfant)
+        public bool AjouterNouvelEnfantFormulaire(Enfant nouvelEnfant)
         {
-            this.Enfants.Add(new EnfantViewModel(enfant));
-            this._dataProvider.AjouterEnfant(enfant);
+            this._dataProvider.AjouterEnfant(nouvelEnfant);
             return true;
+        }
+
+        public bool ModifierNouvelEnfantFormulaire(Enfant nouvelEnfant)
+        {
+            this._dataProvider.ModifierEnfant(nouvelEnfant);
+            return true;
+            
         }
 
         public bool SupprimerEnfant()

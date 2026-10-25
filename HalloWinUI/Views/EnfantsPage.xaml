@@ -101,6 +101,11 @@
                     Supprimer un enfant
                 </Button.Content>
             </Button>
+            <Button Click="btnModifierEnfant_Click">
+                <Button.Content>
+                    Modifier un enfant
+                </Button.Content>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>

@@ -31,7 +31,7 @@
             AutomationProperties.HeadingLevel="Level2"
             FontSize="20"
             FontWeight="SemiBold"
-            Text="Ajouter un enfant" />
+            Text="{x:Bind ViewModel.SousTitrePage, Mode=OneWay}" />
         <TextBox
             Grid.Row="2"
             Grid.Column="0"

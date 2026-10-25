@@ -47,12 +47,19 @@ namespace HalloWinUI.Views
                 await dialogueErreur.ShowAsync();
                 return;
             }
-            Frame.Navigate(typeof(EnfantsPage), enfantCree);
+            Frame.Navigate(typeof(EnfantsPage), (this.ViewModel.OperationActuelle, enfantCree));
         }
 
         public void btnAnnulerAjout_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(EnfantsPage), null);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            this.ViewModel.GererParametreNavigation(e.Parameter);
         }
     }
 }

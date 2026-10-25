@@ -44,7 +44,7 @@ namespace HalloWinUI.Views
 
         public void btnAjouterEnfant_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(AjoutEnfantPage));
+            Frame.Navigate(typeof(AjoutEnfantPage), null);
         }
 
         public async void btnSupprimerEnfant_Click(object sender, RoutedEventArgs e)
@@ -93,14 +93,54 @@ namespace HalloWinUI.Views
             }
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        public async void btnModifierEnfant_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ViewModel.EnfantSelectionne is null)
+            {
+                ContentDialog dialogueErreur = new ContentDialog()
+                {
+                    Title = "Erreur",
+                    Content = "Vous devez sélectionner un enfant avant de le modifier!",
+                    CloseButtonText = "OK",
+                    XamlRoot = this.XamlRoot
+                };
+                await dialogueErreur.ShowAsync();
+                return;
+            }
+
+
+            EnfantViewModel enfantModifie = this.ViewModel.EnfantSelectionne;
+            Frame.Navigate(typeof(AjoutEnfantPage), enfantModifie);
+        }
+
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            if (e.Parameter is Enfant)
+            if (e.Parameter is (string operation, Enfant nouvelEnfant))
             {
-                this.ViewModel.AjouterEnfantFormulaire((Enfant)e.Parameter);
+                bool resultat;
+                if (operation == "Modification")
+                {
+                    resultat = this.ViewModel.ModifierNouvelEnfantFormulaire(nouvelEnfant);
+                } else
+                {
+                    resultat = this.ViewModel.AjouterNouvelEnfantFormulaire(nouvelEnfant);
+                }
+                if (!resultat)
+                {
+                    ContentDialog dialogueErreur = new ContentDialog()
+                    {
+                        Title = "Erreur",
+                        Content = "Il y a eu une erreur lors de l'opération!",
+                        CloseButtonText = "OK",
+                        XamlRoot = this.XamlRoot ?? Frame.XamlRoot
+                    };
+                    await dialogueErreur.ShowAsync();
+                    return;
+                }
             }
         }
+
     }
 }
