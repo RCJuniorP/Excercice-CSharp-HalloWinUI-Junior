@@ -81,3 +81,28 @@ Pour la modification, réutiliser la page AjouterEnfant :
     Sinon
         Mettre à jour l'interface pour dire que c'est une création et effacer les données dans le formulaire
     Utiliser le ViewModel pour faire ça
+
+## Partie 3
+
+8. Ajouter la validation dans les deux formulaires : à l'ajout d'une maison et à l'ajout d'un enfant.
+    - Chaque champ invalide affiche les mesages d'erreurs clairs sous le champ.
+    - Après un ajout réussi, le formulaire est vidé et les messages d'erreur disparaissent.
+    - Optionnel : Le bouton d'ajout ou d'enregistrement est désactivé tant que le formulaire contient une erreur.
+
+
+        **Formulaire d'ajout d'une maison**
+        
+        | Champ | Validations |
+        |---|---|
+        | Numéro civique | Obligatoire ; chiffres uniquement ; de 1 à 6 caractères |
+        | Rue | Obligatoire ; de 3 à 100 caractères |
+        | Ville | Obligatoire ; de 2 à 50 caractères ; lettres, espaces, traits d'union et apostrophes seulement | 
+        | Code postal | Obligatoire ; format canadien `A9A 9A9` (l'espace et les minuscules sont acceptés à la saisie) ; enregistré en majuscules avec l'espace |
+        
+        **Formulaire d'ajout d'un enfant**
+        
+        | Champ | Validations |
+        |---|---|
+        | Nom | Obligatoire ; de 2 à 50 caractères ; lettres, espaces, traits d'union et apostrophes seulement |
+
+9. Implémentez la validation suivante : on ne peut pas ajouter une maison dont l'adresse (numéro civique, rue et ville) existe déjà dans la liste.
