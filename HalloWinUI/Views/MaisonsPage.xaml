@@ -52,31 +52,46 @@
                 </Grid.RowDefinitions>
 
                 <!--  Ligne 1 : numéro + rue  -->
+                <StackPanel
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="1"
+                    Orientation="Vertical">
+                    <TextBox
+                        Header="Numéro"
+                        PlaceholderText="123"
+                        Text="{x:Bind ViewModel.NouvelleMaison.NumeroCivique, Mode=TwoWay}" />
+                    <ItemsView Foreground="Coral" ItemsSource="{x:Bind ViewModel.NouvelleMaison.GetErrors('NumeroCivique'), Mode=OneWay}">
+                        <ItemsView.Resources>
+                            <SolidColorBrush x:Key="ItemContainerPointerOverBackground" Color="Transparent" />
+                        </ItemsView.Resources>
+                    </ItemsView>
+                </StackPanel>
+
                 <TextBox
-                    Header="Numéro"
-                    PlaceholderText="123"
-                    Text="{x:Bind ViewModel.FormNumeroRue, Mode=TwoWay}" />
-                <TextBox
+                    Grid.Row="0"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
                     Header="Rue"
                     PlaceholderText="Rue des Fantômes"
-                    Text="{x:Bind ViewModel.FormNomRue, Mode=TwoWay}" />
+                    Text="{x:Bind ViewModel.NouvelleMaison.Rue, Mode=TwoWay}" />
 
                 <!--  Ligne 2 : ville + code postal  -->
                 <TextBox
                     Grid.Row="1"
+                    Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Header="Ville"
                     PlaceholderText="Gatineau"
-                    Text="{x:Bind ViewModel.FormVille, Mode=TwoWay}" />
+                    Text="{x:Bind ViewModel.NouvelleMaison.Ville, Mode=TwoWay}" />
                 <TextBox
                     Grid.Row="1"
                     Grid.Column="2"
+                    Grid.ColumnSpan="1"
                     Header="Code postal"
                     MaxLength="7"
                     PlaceholderText="J8X 1A1"
-                    Text="{x:Bind ViewModel.FormCodePostal, Mode=TwoWay}" />
+                    Text="{x:Bind ViewModel.NouvelleMaison.CodePostal, Mode=TwoWay}" />
 
                 <!--  Ligne 3 : bouton  -->
                 <Button

@@ -1,19 +1,27 @@
 ﻿using HalloWinUI.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HalloWinUI.ViewModels.Models
 {
-    public class MaisonViewModel : BaseViewModel
+    public class MaisonViewModel : ViewModelValidable
     {
         private readonly Maison _maison;
 
         public MaisonViewModel(Maison maison)
         {
             this._maison = maison;
+            string[] proprietesValidables = ["NumeroCivique", "Rue", "Ville", "CodePostal", "EstSignalee"];
+            foreach (string proprieteValidable in proprietesValidables)
+            {
+                this._errors.Add(proprieteValidable, new ObservableCollection<ValidationResult>());
+            }
         }
 
         public int Id { 
@@ -22,6 +30,7 @@ namespace HalloWinUI.ViewModels.Models
             }
         }
 
+        [Required(ErrorMessage = "Le numéro civique est requis!")]
         public string NumeroCivique
         {
             get {
@@ -124,6 +133,11 @@ namespace HalloWinUI.ViewModels.Models
         public string StatutSecurite
         {
             get => this.EstSignalee ? "Signalé" : "Sécuritaire";
+        }
+
+        public IEnumerable GetErrors(string propriete)
+        {
+            return base.GetErrors(propriete);
         }
     }
 }

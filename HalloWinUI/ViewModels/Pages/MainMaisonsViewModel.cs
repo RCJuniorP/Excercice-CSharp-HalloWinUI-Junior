@@ -11,57 +11,16 @@ namespace HalloWinUI.ViewModels.Pages
         private readonly IHalloweenDataProvider _dataProvider;
 
         public ObservableCollection<MaisonViewModel> Maisons { get; } = new ObservableCollection<MaisonViewModel>();
-        
-        private string _formNomRue = "";
-        public string FormNomRue { 
-            get => this._formNomRue; 
-            set {
-               if (value != this._formNomRue)
-                {
-                    this._formNomRue = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
 
-        private string _formNumeroRue = "";
-        public string FormNumeroRue
+        private MaisonViewModel _nouvelleMaison = new MaisonViewModel(new Maison());
+        public MaisonViewModel NouvelleMaison
         {
-            get => this._formNumeroRue;
+            get => this._nouvelleMaison;
             set
             {
-                if (value != this._formNumeroRue)
+                if (this._nouvelleMaison != value)
                 {
-                    this._formNumeroRue = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
-        private string _formVille = "";
-        public string FormVille
-        {
-            get => this._formVille;
-            set
-            {
-                if (value != this._formVille)
-                {
-                    this._formVille = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
-
-        private string _formCodePostal = "";
-        public string FormCodePostal
-        {
-            get => this._formCodePostal;
-            set
-            {
-                if (value != this._formCodePostal)
-                {
-                    this._formCodePostal = value;
+                    this._nouvelleMaison = value;
                     RaisePropertyChanged();
                 }
             }
@@ -98,13 +57,15 @@ namespace HalloWinUI.ViewModels.Pages
 
         public bool AjouterMaison()
         {
-            if (string.IsNullOrEmpty(this.FormNumeroRue) || string.IsNullOrEmpty(this.FormNomRue) || string.IsNullOrEmpty(this.FormVille))
+            if (!this.NouvelleMaison.EstValide)
             {
                 return false;
             }
-            Maison nouvelleMaison = new Maison(this.FormNumeroRue, this.FormNomRue, this.FormVille, this.FormCodePostal);
+            Maison nouvelleMaison = new Maison(this.NouvelleMaison.NumeroCivique, this.NouvelleMaison.Rue, 
+                this.NouvelleMaison.Ville, this.NouvelleMaison.CodePostal);
             this.Maisons.Add(new MaisonViewModel(nouvelleMaison));
             this._dataProvider.AjouterMaison(nouvelleMaison);
+            this.NouvelleMaison = new MaisonViewModel(new Maison());
             return true;
         }
 

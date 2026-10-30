@@ -25,5 +25,6 @@ namespace HalloWinUI.Models
             EstSignalee = estSignalee;
         }
 
+        public Maison() : this("", "", "") { }
     }
 }
