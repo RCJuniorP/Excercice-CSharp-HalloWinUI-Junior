@@ -34,20 +34,19 @@ namespace HalloWinUI.Views
 
         public async void btnConfirmerEnfant_Click(object sender, RoutedEventArgs e)
         {
-            Enfant? enfantCree = this.ViewModel.CreerEnfant();
-            if (enfantCree is null)
+            if (!this.ViewModel.NouvelEnfant.EstValide)
             {
                 ContentDialog dialogueErreur = new ContentDialog()
                 {
                     Title = "Erreur",
-                    Content = "Il y a eu une erreur lors de la création du nouvel enfant! Assurez vous de remplir toutes les informations nécessaires.",
+                    Content = "Il y a un champ invalide!",
                     CloseButtonText = "OK",
                     XamlRoot = this.XamlRoot
                 };
                 await dialogueErreur.ShowAsync();
                 return;
             }
-            Frame.Navigate(typeof(EnfantsPage), (this.ViewModel.OperationActuelle, enfantCree));
+            Frame.Navigate(typeof(EnfantsPage), (this.ViewModel.OperationRetour, this.ViewModel.NouvelEnfant));
         }
 
         public void btnAnnulerAjout_Click(object sender, RoutedEventArgs e)

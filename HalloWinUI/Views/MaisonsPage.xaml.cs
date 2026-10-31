@@ -41,12 +41,37 @@ namespace HalloWinUI.Views
 
         private async void btnAjouterMaison_Click(object sender, RoutedEventArgs e)
         {
+            if (!ViewModel.NouvelleMaison.EstValide)
+            {
+                ContentDialog dialog = new ContentDialog()
+                {
+                    Title = "Erreur",
+                    Content = "Un champ dans le formulaire est invalide!",
+                    CloseButtonText = "OK",
+                    XamlRoot = this.Content.XamlRoot
+                };
+                await dialog.ShowAsync();
+                return;
+            }
+
+            if (ViewModel.NouvelleMaisonExisteDeja)
+            {
+                ContentDialog dialog = new ContentDialog()
+                {
+                    Title = "Erreur",
+                    Content = "Cette maison exsiste déjà!",
+                    CloseButtonText = "OK",
+                    XamlRoot = this.Content.XamlRoot
+                };
+                await dialog.ShowAsync();
+                return;
+            }
             if (!ViewModel.AjouterMaison())
             {
                 ContentDialog dialog = new ContentDialog()
                 {
                     Title = "Erreur",
-                    Content = "Il manque des information(s) obligatoires!",
+                    Content = "Il y a eu une erreur lors de l'ajout!",
                     CloseButtonText = "OK",
                     XamlRoot = this.Content.XamlRoot
                 };

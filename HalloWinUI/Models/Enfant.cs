@@ -10,5 +10,7 @@
             Nom = nom;
         }
 
+        public Enfant() : this(string.Empty) {}
+
     }
 }

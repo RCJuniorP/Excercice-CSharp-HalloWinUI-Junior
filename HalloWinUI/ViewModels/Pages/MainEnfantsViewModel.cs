@@ -45,15 +45,17 @@ namespace HalloWinUI.ViewModels.Pages
             }
         }
 
-        public bool AjouterNouvelEnfantFormulaire(Enfant nouvelEnfant)
+        public bool AjouterNouvelEnfantFormulaire(EnfantViewModel nouvelEnfant)
         {
-            this._dataProvider.AjouterEnfant(nouvelEnfant);
+            this._dataProvider.AjouterEnfant(new Enfant(nouvelEnfant.Nom));
             return true;
         }
 
-        public bool ModifierNouvelEnfantFormulaire(Enfant nouvelEnfant)
+        public bool ModifierNouvelEnfantFormulaire(EnfantViewModel nouvelEnfant, int idEnfant)
         {
-            this._dataProvider.ModifierEnfant(nouvelEnfant);
+            Enfant enfantModifie = new Enfant(nouvelEnfant.Nom);
+            enfantModifie.Id = idEnfant;
+            this._dataProvider.ModifierEnfant(enfantModifie);
             return true;
             
         }

@@ -3,6 +3,8 @@ using HalloWinUI.Models;
 using HalloWinUI.ViewModels;
 using HalloWinUI.ViewModels.Models;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace HalloWinUI.ViewModels.Pages
 {
@@ -55,9 +57,19 @@ namespace HalloWinUI.ViewModels.Pages
 
         }
 
+        public bool NouvelleMaisonExisteDeja
+        {
+            get => this.Maisons.FirstOrDefault((maison) =>
+                        (maison.NumeroCivique == this.NouvelleMaison.NumeroCivique 
+                        && maison.Rue.ToLower() == this.NouvelleMaison.Rue.ToLower()
+                        && maison.Ville.ToLower() == this.NouvelleMaison.Ville.ToLower())
+                
+            ) is not null;
+        }
+
         public bool AjouterMaison()
         {
-            if (!this.NouvelleMaison.EstValide)
+            if (!this.NouvelleMaison.EstValide || this.NouvelleMaisonExisteDeja)
             {
                 return false;
             }

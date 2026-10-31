@@ -10,15 +10,15 @@ namespace HalloWinUI.ViewModels.Pages // TODO : Déterminer si c'est la page Ajo
 {
     public class MainAjoutEnfantViewModel : BaseViewModel
     {
-        private string _nomEnfant = "";
-        public string NomEnfant
+        private EnfantViewModel _nouvelEnfant = new EnfantViewModel(new Enfant());
+        public EnfantViewModel NouvelEnfant
         {
-            get => this._nomEnfant;
+            get => this._nouvelEnfant;
             set
             {
-                if (value != this._nomEnfant)
+                if (value != this._nouvelEnfant)
                 {
-                    this._nomEnfant = value;
+                    this._nouvelEnfant = value;
                     RaisePropertyChanged();
                 }
             }
@@ -42,23 +42,11 @@ namespace HalloWinUI.ViewModels.Pages // TODO : Déterminer si c'est la page Ajo
 
         private int? idEnfant = null;
 
+        public string OperationRetour { get => this.OperationActuelle == "Modification" ? this.OperationActuelle + "-" + this.idEnfant.ToString() : this.OperationActuelle; }
+
         public MainAjoutEnfantViewModel()
         {
 
-        }
-
-        public Enfant? CreerEnfant()
-        {
-            if (String.IsNullOrEmpty(this._nomEnfant))
-            {
-                return null;
-            }
-            Enfant nouvelEnfant = new Enfant(this.NomEnfant);
-            if (this.idEnfant is not null)
-            {
-                nouvelEnfant.Id = (int)this.idEnfant;
-            }
-            return nouvelEnfant;
         }
 
         public void GererParametreNavigation(object parametre)
@@ -69,14 +57,14 @@ namespace HalloWinUI.ViewModels.Pages // TODO : Déterminer si c'est la page Ajo
                 this.OperationActuelle = "Modification";
                 this.idEnfant = enfantModifie.Id;
                 this.SousTitrePage = $"Modifier l'enfant #{this.idEnfant}";
-                this.NomEnfant = enfantModifie.Nom;
+                this.NouvelEnfant = enfantModifie;
             }
             else
             {
                 this.OperationActuelle = "Addition";
                 this.idEnfant = null;
                 this.SousTitrePage = "Ajouter un enfant";
-                this.NomEnfant = "";
+                this.NouvelEnfant = new EnfantViewModel(new Enfant());
             }
         }
     }

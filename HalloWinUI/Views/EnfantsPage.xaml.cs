@@ -117,13 +117,18 @@ namespace HalloWinUI.Views
         {
             base.OnNavigatedTo(e);
 
-            if (e.Parameter is (string operation, Enfant nouvelEnfant))
+            if (e.Parameter is (string operation, EnfantViewModel nouvelEnfant))
             {
                 bool resultat;
-                if (operation == "Modification")
+                if (operation.StartsWith("Modification"))
                 {
-                    resultat = this.ViewModel.ModifierNouvelEnfantFormulaire(nouvelEnfant);
-                } else
+                    resultat = int.TryParse(operation.Replace("Modification-", ""), out int idEnfant);
+                    if (resultat)
+                    {
+                        resultat = this.ViewModel.ModifierNouvelEnfantFormulaire(nouvelEnfant, idEnfant);
+                    } 
+                } 
+                else
                 {
                     resultat = this.ViewModel.AjouterNouvelEnfantFormulaire(nouvelEnfant);
                 }

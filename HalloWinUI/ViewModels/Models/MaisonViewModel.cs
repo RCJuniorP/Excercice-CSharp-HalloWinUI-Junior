@@ -21,6 +21,8 @@ namespace HalloWinUI.ViewModels.Models
             foreach (string proprieteValidable in proprietesValidables)
             {
                 this._errors.Add(proprieteValidable, new ObservableCollection<ValidationResult>());
+                this.Validate(typeof(Maison).GetProperty(proprieteValidable)?.GetValue(this._maison, null), proprieteValidable);
+                // Voir https://stackoverflow.com/questions/138045/is-there-something-like-pythons-getattr-in-c
             }
         }
 
@@ -30,14 +32,15 @@ namespace HalloWinUI.ViewModels.Models
             }
         }
 
-        [Required(ErrorMessage = "Le numéro civique est requis!")]
+        [Required(ErrorMessage = "Le numéro civique est obligatoire!")]
+        [RegularExpression("""^\d{1,6}$""", ErrorMessage = "Le numéro civique doit contenir 1 à 6 chiffres et seulement des chiffres!")]
         public string NumeroCivique
         {
             get {
                 return this._maison.NumeroCivique;
             }
             set {
-                if (this._maison.NumeroCivique != value) {
+                if (this._maison.NumeroCivique != value && Validate(value)) {
                     this._maison.NumeroCivique = value;
                     RaisePropertyChanged();
                     RaisePropertyChanged("Adresse");
@@ -45,13 +48,15 @@ namespace HalloWinUI.ViewModels.Models
             }
         }
 
+        [Required(ErrorMessage = "La rue est obligatoire!")]
+        [Length(3, 100, ErrorMessage ="La rue doit être de 3 à 100 caractères!")]
         public string Rue
         {
             get {
                 return this._maison.Rue;
             }
             set { 
-                if (this._maison.Rue != value)
+                if (this._maison.Rue != value && Validate(value))
                 {
                     this._maison.Rue = value;
                     RaisePropertyChanged();
@@ -65,6 +70,9 @@ namespace HalloWinUI.ViewModels.Models
             get => this.NumeroCivique + " " + this.Rue;
         }
 
+        [Required(ErrorMessage = "La ville est obligatoire!")]
+        [RegularExpression("""^(\p{Lu}|\p{Ll}|[ '-])*$""", ErrorMessage = "Seulement les lettres, espaces, traits d'union et apostrophes sont autorisés!")]
+        [Length(2, 50, ErrorMessage = "La ville doit être de 2 à 50 caractères!")]
         public string Ville
         {
             get
@@ -73,7 +81,7 @@ namespace HalloWinUI.ViewModels.Models
             }
             set
             {
-                if (this._maison.Ville != value)
+                if (this._maison.Ville != value && Validate(value))
                 {
                     this._maison.Ville = value;
                     RaisePropertyChanged();
@@ -82,6 +90,8 @@ namespace HalloWinUI.ViewModels.Models
             }
         }
 
+        [Required(ErrorMessage = "Le code postal est obligatoire!")]
+        [RegularExpression("""[a-zA-Z]\d[a-zA-Z]( )?\d[a-zA-Z]\d""", ErrorMessage = "Le code postal n'a pas été entré avec un format valide! (ex : A9A 9A9)")]
         public string CodePostal
         {
             get
@@ -90,9 +100,13 @@ namespace HalloWinUI.ViewModels.Models
             }
             set
             {
-                if (this._maison.CodePostal != value)
+                if (this._maison.CodePostal != value && Validate(value))
                 {
-                    this._maison.CodePostal = value;
+                    if (value.Length == 6)
+                    {
+                        value = value.Substring(0, 3) + " " + value.Substring(3, 3);
+                    }
+                    this._maison.CodePostal = value.ToUpper();
                     RaisePropertyChanged();
                     RaisePropertyChanged("Region");
                 }
@@ -121,7 +135,7 @@ namespace HalloWinUI.ViewModels.Models
             }
             set
             {
-                if (this._maison.EstSignalee != value)
+                if (this._maison.EstSignalee != value && Validate(value))
                 {
                     this._maison.EstSignalee = value;
                     RaisePropertyChanged();
@@ -135,9 +149,10 @@ namespace HalloWinUI.ViewModels.Models
             get => this.EstSignalee ? "Signalé" : "Sécuritaire";
         }
 
-        public IEnumerable GetErrors(string propriete)
+        public new IEnumerable GetErrors(string propriete)
         {
             return base.GetErrors(propriete);
         }
+
     }
 }
