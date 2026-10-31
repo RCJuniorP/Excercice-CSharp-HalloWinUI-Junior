@@ -59,7 +59,7 @@
             Grid.Row="3"
             Grid.Column="0"
             Orientation="Horizontal">
-            <Button Click="btnConfirmerEnfant_Click">
+            <Button Click="btnConfirmerEnfant_Click" IsEnabled="{x:Bind ViewModel.ConfirmationPossible, Mode=OneWay}">
                 <Button.Content>
                     Confirmer
                 </Button.Content>

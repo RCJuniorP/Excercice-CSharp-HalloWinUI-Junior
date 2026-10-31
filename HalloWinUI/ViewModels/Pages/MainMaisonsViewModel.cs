@@ -3,6 +3,7 @@ using HalloWinUI.Models;
 using HalloWinUI.ViewModels;
 using HalloWinUI.ViewModels.Models;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -24,6 +25,7 @@ namespace HalloWinUI.ViewModels.Pages
                 {
                     this._nouvelleMaison = value;
                     RaisePropertyChanged();
+                    value.PropertyChanged += (object? sender, PropertyChangedEventArgs e) => RaisePropertyChanged("AjoutMaisonPossible");
                 }
             }
         }
@@ -38,13 +40,17 @@ namespace HalloWinUI.ViewModels.Pages
                 {
                     this._maisonSelectionnee = value;
                     RaisePropertyChanged();
+                    value.PropertyChanged += (object? sender, PropertyChangedEventArgs e) => RaisePropertyChanged("AjoutMaisonPossible");
                 }
             }
         }
 
+        public bool AjoutMaisonPossible { get => this.NouvelleMaison.EstValide; }
+
         public MainMaisonsViewModel(IHalloweenDataProvider halloweenDataProvider)
         {
             _dataProvider = halloweenDataProvider;
+            this.NouvelleMaison.PropertyChanged += (object? sender, PropertyChangedEventArgs e) => RaisePropertyChanged("AjoutMaisonPossible");
         }
 
         public void ChargerDonnees()

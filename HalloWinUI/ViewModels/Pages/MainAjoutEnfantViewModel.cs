@@ -2,6 +2,7 @@
 using HalloWinUI.ViewModels.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,8 @@ namespace HalloWinUI.ViewModels.Pages // TODO : Déterminer si c'est la page Ajo
                 {
                     this._nouvelEnfant = value;
                     RaisePropertyChanged();
+                    RaisePropertyChanged("ConfirmationPossible");
+                    value.PropertyChanged += (object? sender, PropertyChangedEventArgs e) => RaisePropertyChanged("ConfirmationPossible");
                 }
             }
         }
@@ -42,11 +45,13 @@ namespace HalloWinUI.ViewModels.Pages // TODO : Déterminer si c'est la page Ajo
 
         private int? idEnfant = null;
 
+        public bool ConfirmationPossible { get => this.NouvelEnfant.EstValide; }
+
         public string OperationRetour { get => this.OperationActuelle == "Modification" ? this.OperationActuelle + "-" + this.idEnfant.ToString() : this.OperationActuelle; }
 
         public MainAjoutEnfantViewModel()
         {
-
+            this.NouvelEnfant.PropertyChanged += (object? sender, PropertyChangedEventArgs e) => RaisePropertyChanged("ConfirmationPossible");
         }
 
         public void GererParametreNavigation(object parametre)
