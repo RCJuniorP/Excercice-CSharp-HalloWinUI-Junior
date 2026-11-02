@@ -40,7 +40,6 @@ namespace HalloWinUI.ViewModels.Pages
                 {
                     this._maisonSelectionnee = value;
                     RaisePropertyChanged();
-                    value.PropertyChanged += (object? sender, PropertyChangedEventArgs e) => RaisePropertyChanged("AjoutMaisonPossible");
                 }
             }
         }

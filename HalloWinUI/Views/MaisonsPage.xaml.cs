@@ -28,7 +28,8 @@ namespace HalloWinUI.Views
         public MainMaisonsViewModel ViewModel { get; }
         public MaisonsPage()
         {
-            ViewModel = new MainMaisonsViewModel(new HalloweenDataProvider());
+            IHalloweenDataProvider dataProvider = App.Current is App applicationCourante ? applicationCourante.DataProvider : new HalloweenDataProvider();
+            ViewModel = new MainMaisonsViewModel(dataProvider);
             InitializeComponent();
 
             this.Loaded += this.MaisonPage_Loaded;

@@ -31,7 +31,8 @@ namespace HalloWinUI.Views
         MainEnfantsViewModel ViewModel { get; }
         public EnfantsPage()
         {
-            this.ViewModel = new MainEnfantsViewModel(new HalloweenDataProvider());
+            IHalloweenDataProvider dataProvider = App.Current is App applicationCourante ? applicationCourante.DataProvider : new HalloweenDataProvider();
+            this.ViewModel = new MainEnfantsViewModel(dataProvider);
             InitializeComponent();
 
             this.Loaded += this.ApresChargement;

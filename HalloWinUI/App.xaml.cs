@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using HalloWinUI.Data;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -27,6 +28,7 @@ namespace HalloWinUI
     public partial class App : Application
     {
         private Window? _window;
+        public IHalloweenDataProvider DataProvider { get; set; } = new HalloweenDataProvider();
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
